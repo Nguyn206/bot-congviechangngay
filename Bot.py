@@ -10,11 +10,16 @@ from telegram.ext import (
 import pandas as pd
 from datetime import datetime
 
+from flask import Flask
+from threading import Thread
+
+import os
+
 # =====================================
 # TELEGRAM
 # =====================================
 
-BOT_TOKEN = "8812970343:AAE1z5T9YOxPkG1z551aODsqHzuAQM2FsnE"
+BOT_TOKEN = os.getenv("8812970343:AAE1z5T9YOxPkG1z551aODsqHzuAQM2FsnE")
 
 # =====================================
 # GOOGLE SHEET
@@ -268,6 +273,24 @@ async def handle_message(
         )
 
 # =====================================
+# WEB SERVER CHO RENDER
+# =====================================
+
+web_app = Flask(__name__)
+
+@web_app.route("/")
+def home():
+    return "Bot Telegram dang chay!"
+
+def run_web():
+    port = int(os.environ.get("PORT", 10000))
+
+    web_app.run(
+        host="0.0.0.0",
+        port=port
+    )
+
+# =====================================
 # CHẠY BOT
 # =====================================
 
@@ -294,5 +317,10 @@ app.add_handler(
 print("=================================")
 print("BOT ĐANG CHẠY...")
 print("=================================")
+
+Thread(
+    target=run_web,
+    daemon=True
+).start()
 
 app.run_polling()

@@ -19,7 +19,7 @@ import os
 # TELEGRAM
 # =====================================
 
-BOT_TOKEN = os.getenv("8812970343:AAGOSjH903LLr4a2kCUjVo2FiYh6bBDXlKM")
+BOT_TOKEN = "8812970343:AAFz_GeUmTinZpYS9Hv9cArpN-Ky_CbNVMA"
 
 # =====================================
 # GOOGLE SHEET
